@@ -1,0 +1,77 @@
+%define alphatag                #ALPHATAG#
+
+Summary:   GTK support library for colord
+Name:      colord-gtk
+Version:   #VERSION#
+Release:   0.#BUILD#%{?alphatag}%{?dist}
+License:   LGPLv2+
+URL:       http://www.freedesktop.org/software/colord/
+Source0:   http://www.freedesktop.org/software/colord/releases/%{name}-%{version}.tar.xz
+
+BuildRequires: docbook-utils
+BuildRequires: gettext
+BuildRequires: glib2-devel
+BuildRequires: intltool
+BuildRequires: lcms2-devel >= 2.2
+BuildRequires: gobject-introspection-devel
+BuildRequires: vala-tools
+BuildRequires: gtk3-devel
+BuildRequires: gtk-doc
+
+%description
+colord is a support library for colord and provides additional
+functionality that requires GTK+.
+
+%package devel
+Summary: Development package for %{name}
+Requires: %{name} = %{version}-%{release}
+
+%description devel
+Files for development with %{name}.
+
+%prep
+%setup -q
+
+%build
+%configure \
+        --enable-gtk-doc \
+        --disable-static \
+        --disable-rpath \
+        --disable-dependency-tracking
+
+make %{?_smp_mflags}
+
+%install
+make install DESTDIR=$RPM_BUILD_ROOT
+
+# Remove static libs and libtool archives.
+find %{buildroot} -name '*.la' -exec rm -f {} ';'
+find %{buildroot} -name '*.a' -exec rm -f {} ';'
+
+%find_lang %{name}
+
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
+
+%files -f %{name}.lang
+%defattr(-,root,root,-)
+%doc README AUTHORS NEWS COPYING
+%{_libdir}/libcolord-gtk.so.*
+%{_datadir}/gir-1.0/ColordGtk-1.0.gir
+
+%files devel
+%defattr(-,root,root,-)
+%{_libdir}/libcolord-gtk.so
+%{_libdir}/pkgconfig/colord-gtk.pc
+%dir %{_includedir}/colord-1
+%{_includedir}/colord-1/colord-gtk.h
+%dir %{_includedir}/colord-1/colord-gtk
+%{_includedir}/colord-1/colord-gtk/*.h
+%{_libdir}/girepository-1.0/ColordGtk-1.0.typelib
+%dir %{_datadir}/gtk-doc/html/colord-gtk
+%{_datadir}/gtk-doc/html/colord-gtk
+
+%changelog
+* #LONGDATE# Richard Hughes <richard@hughsie.com> #VERSION#-0.#BUILD##ALPHATAG#
+- Update from git
+
