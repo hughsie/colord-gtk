@@ -81,7 +81,7 @@ CLEANFILES = $(BUILT_SOURCES)
 
 if HAVE_INTROSPECTION
 introspection_sources =						\
-	$(libcolordgtk_la_SOURCES)				\
+	$(libcolord_gtk_la_SOURCES)				\
 	$(libcolordgtkbase_include_HEADERS)
 
 ColordGtk-1.0.gir: libcolord-gtk.la

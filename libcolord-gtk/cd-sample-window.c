@@ -59,7 +59,7 @@ cd_sample_window_pulse_cb (CdSampleWindow *sample_window)
 /**
  * cd_sample_window_set_fraction:
  * @sample_window: a valid #CdSampleWindow instance
- * @percentage: the fraction value to show, or -1 for pulsing.
+ * @fraction: the fraction value to show, or -1 for pulsing.
  *
  * Sets the percentage value on the window.
  **/
@@ -92,9 +92,7 @@ cd_sample_window_set_fraction (CdSampleWindow *sample_window,
 /**
  * cd_sample_window_set_color:
  * @sample_window: a valid #CdSampleWindow instance
- * @red: the red color value
- * @green: the green color value
- * @blue: the blue color value
+ * @color: the color
  *
  * Sets the window to a specific color.
  **/
