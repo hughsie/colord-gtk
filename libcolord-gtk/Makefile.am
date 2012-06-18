@@ -88,7 +88,7 @@ ColordGtk-1.0.gir: libcolord-gtk.la
 ColordGtk_1_0_gir_INCLUDES = GObject-2.0 Gio-2.0 Gtk-3.0 Colord-1.0
 ColordGtk_1_0_gir_CFLAGS = $(INCLUDES)
 ColordGtk_1_0_gir_SCANNERFLAGS = --identifier-prefix=Cd \
-				--symbol-prefix=cd_ \
+				--symbol-prefix=cd \
 				--warn-all \
 				--add-include-path=$(srcdir) \
 				--add-include-path=$(top_srcdir)/libcolord \
@@ -106,20 +106,21 @@ typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 
 CLEANFILES += $(gir_DATA) $(typelib_DATA)
 
-if FALSE
 if HAVE_VAPIGEN
 colord-gtk.vapi: ColordGtk-1.0.gir
 	$(MAKE) $(AM_MAKEFLAGS) ColordGtk-1.0.gir
 	$(AM_V_GEN)$(VAPIGEN) $(VAPIGENFLAGS)			\
 		--library colord-gtk				\
+		--vapidir $(top_builddir)/libcolord		\
 		--pkg gio-2.0					\
+		--pkg gtk+-3.0					\
+		--pkg colord					\
 		ColordGtk-1.0.gir
 	touch $@
 vapidir = $(datadir)/vala/vapi
 dist_vapi_DATA =						\
 	colord-gtk.vapi
 CLEANFILES += $(dist_vapi_DATA)
-endif
 endif
 
 endif
