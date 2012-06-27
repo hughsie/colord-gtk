@@ -20,7 +20,7 @@
  */
 
 #if !defined (__COLORD_GTK_H_INSIDE__) && !defined (CD_COMPILATION)
-#error "Only <colord.h> can be included directly."
+#error "Only <colord-gtk.h> can be included directly."
 #endif
 
 #ifndef __CD_WINDOW_SYNC_H
