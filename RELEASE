@@ -2,9 +2,9 @@ colord-gtk Release Notes
 
 1. Write NEWS entries for colord in the same format as usual.
 
-git shortlog COLORD_GTK_0_1_21.. | grep -i -v trivial | grep -v Merge > NEWS.new
+git shortlog COLORD_GTK_0_1_22.. | grep -i -v trivial | grep -v Merge > NEWS.new
 
-Version 0.1.22
+Version 0.1.23
 ~~~~~~~~~~~~~~
 Released: 2012-xx-xx
 
@@ -15,8 +15,8 @@ Bugfixes:
 2. Commit changes to git:
 
 # MAKE SURE THESE ARE CORRECT
-export release_version="0.1.22"
-export release_tag="COLORD_GTK_0_1_22"
+export release_version="0.1.23"
+export release_tag="COLORD_GTK_0_1_23"
 
 git commit -a -m "Release colord-gtk ${release_version}"
 git tag -s -f -m "Release colord-gtk ${release_version}" "${release_tag}"
@@ -30,8 +30,8 @@ make dist
 
 3a. Generate the additon verification metadata
 
-sha1sum colord-${release_version}.tar.xz > colord-${release_version}.tar.xz.sha1
-gpg -b -a colord-${release_version}.tar.xz
+sha1sum colord-gtk-${release_version}.tar.xz > colord-${release_version}.tar.xz.sha1
+gpg -b -a colord-gtk-${release_version}.tar.xz
 
 4. Upload tarball:
 
@@ -43,13 +43,10 @@ scp colord-gtk-${release_version}.tar.* hughsient@annarchy.freedesktop.org:/srv/
 
 git commit -a -m "trivial: post release version bump"
 git push
-tx push --source
-
-7. Sync website with ./upload.sh
 
 8. Send an email to colord@lists.freedesktop.org
 
-colord is a system activated daemon that maps devices to color profiles.
+colord-gtk is a support library for colord and provides additional functionality that requires GTK+.
 
 See http://www.freedesktop.org/software/colord/ for more details.
 
