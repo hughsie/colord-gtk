@@ -19,7 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA
  */
 
-#if !defined (__COLORD_H_INSIDE__) && !defined (CD_COMPILATION)
+#if !defined (__COLORD_GTK_H_INSIDE__) && !defined (CD_COMPILATION)
 #error "Only <colord-gtk.h> can be included directly."
 #endif
 

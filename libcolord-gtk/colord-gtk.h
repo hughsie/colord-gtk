@@ -31,20 +31,17 @@
 #ifndef __COLORD_GTK_H__
 #define __COLORD_GTK_H__
 
-#define __COLORD_H_INSIDE__
+#define __COLORD_GTK_H_INSIDE__
 
 #include <gtk/gtk.h>
-
 #include <colord.h>
-//#include <colord/cd-device.h>
-//#include <colord/cd-profile.h>
-//#include <colord/cd-color.h>
+
 #include <colord-gtk/cd-sample-window.h>
 #include <colord-gtk/cd-version.h>
 #include <colord-gtk/cd-window.h>
 #include <colord-gtk/cd-window-sync.h>
 
-#undef __COLORD_H_INSIDE__
+#undef __COLORD_GTK_H_INSIDE__
 
 #endif /* __COLORD_GTK_H__ */
 

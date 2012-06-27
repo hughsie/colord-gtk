@@ -29,7 +29,7 @@
  * See also: #CdClient, #CdDevice
  */
 
-#if !defined (__COLORD_H_INSIDE__) && !defined (CD_COMPILATION)
+#if !defined (__COLORD_GTK_H_INSIDE__) && !defined (CD_COMPILATION)
 #error "Only <colord.h> can be included directly."
 #endif
 
