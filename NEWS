@@ -1,3 +1,11 @@
+Version 0.1.23
+~~~~~~~~~~~~~~
+Released: 2012-08-29
+
+Bugfixes:
+ - Do not reuse __COLORD_H_INSIDE__ as this causes #include insanity (Richard Hughes)
+ - Add include guards to cd-sample-window.h (Richard Hughes)
+
 Version 0.1.22
 ~~~~~~~~~~~~~~
 Released: 2012-06-27
