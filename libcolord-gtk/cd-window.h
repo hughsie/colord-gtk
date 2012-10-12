@@ -30,8 +30,6 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
-#include "cd-profile.h"
-
 G_BEGIN_DECLS
 
 #define CD_TYPE_WINDOW		(cd_window_get_type ())
