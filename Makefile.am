@@ -19,6 +19,7 @@ snapshot:
 
 DISTCHECK_CONFIGURE_FLAGS =				\
 	--enable-introspection				\
+	--enable-vala					\
 	--enable-gtk-doc
 
 EXTRA_DIST =						\
