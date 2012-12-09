@@ -36,6 +36,7 @@
 #include <gtk/gtk.h>
 #include <colord.h>
 
+#include <colord-gtk/cd-sample-widget.h>
 #include <colord-gtk/cd-sample-window.h>
 #include <colord-gtk/cd-version.h>
 #include <colord-gtk/cd-window.h>

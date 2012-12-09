@@ -25,6 +25,7 @@
 
 #include <colord.h>
 
+#include "cd-sample-widget.h"
 #include "cd-sample-window.h"
 
 static void     cd_sample_window_finalize	(GObject     *object);
@@ -39,7 +40,7 @@ static void     cd_sample_window_finalize	(GObject     *object);
  **/
 struct _CdSampleWindowPrivate
 {
-	GtkWidget			*image;
+	GtkWidget			*sample_widget;
 	GtkWidget			*progress_bar;
 	guint				 pulse_id;
 };
@@ -100,50 +101,12 @@ void
 cd_sample_window_set_color (CdSampleWindow *sample_window,
 			    const CdColorRGB *color)
 {
-	GdkPixbuf *pixbuf;
-	gint width;
-	gint height;
-	gint i;
-	guchar *data;
-	guchar *pixels;
-	GtkWindow *window = GTK_WINDOW (sample_window);
-
-	/* get the window size */
-	gtk_window_get_size (window, &width, &height);
-
-	/* if no pixbuf, create it */
 	g_debug ("setting RGB: %f, %f, %f", color->R, color->G, color->B);
-	pixbuf = gtk_image_get_pixbuf (GTK_IMAGE (sample_window->priv->image));
-	if (pixbuf == NULL) {
-		data = g_new0 (guchar, width * height * 3);
-		pixbuf = gdk_pixbuf_new_from_data (data,
-						   GDK_COLORSPACE_RGB,
-						   FALSE,
-						   8,
-						   width,
-						   height,
-						   width * 3,
-						   (GdkPixbufDestroyNotify) g_free,
-						   NULL);
-		gtk_image_set_from_pixbuf (GTK_IMAGE (sample_window->priv->image),
-					   pixbuf);
-	}
-
-	/* get the pixbuf size */
-	height = gdk_pixbuf_get_height (pixbuf);
-	width = gdk_pixbuf_get_width (pixbuf);
-
-	/* set the pixel array */
-	pixels = gdk_pixbuf_get_pixels (pixbuf);
-	for (i = 0; i < width * height * 3; i += 3) {
-		pixels[i+0] = (guchar) (color->R * 255.0f);
-		pixels[i+1] = (guchar) (color->G * 255.0f);
-		pixels[i+2] = (guchar) (color->B * 255.0f);
-	}
+	cd_sample_widget_set_color (CD_SAMPLE_WIDGET (sample_window->priv->sample_widget), color);
 
 	/* force redraw */
-	gtk_widget_set_visible (sample_window->priv->image, FALSE);
-	gtk_widget_set_visible (sample_window->priv->image, TRUE);
+	gtk_widget_set_visible (sample_window->priv->sample_widget, FALSE);
+	gtk_widget_set_visible (sample_window->priv->sample_widget, TRUE);
 }
 
 /**
@@ -203,15 +166,15 @@ cd_sample_window_init (CdSampleWindow *sample_window)
 	GtkWindow *window = GTK_WINDOW (sample_window);
 	GtkWidget *vbox;
 	sample_window->priv = CD_SAMPLE_WINDOW_GET_PRIVATE (sample_window);
-	sample_window->priv->image = gtk_image_new ();
+	sample_window->priv->sample_widget = cd_sample_widget_new ();
 	sample_window->priv->progress_bar = gtk_progress_bar_new ();
 
 	/* pack in two widgets into the window */
 	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 	gtk_container_add (GTK_CONTAINER (sample_window), vbox);
-	gtk_box_pack_start (GTK_BOX (vbox), sample_window->priv->image, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), sample_window->priv->sample_widget, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), sample_window->priv->progress_bar, FALSE, FALSE, 0);
-	gtk_widget_set_size_request (sample_window->priv->image, 400, 400);
+	gtk_widget_set_size_request (sample_window->priv->sample_widget, 400, 400);
 	gtk_widget_show_all (vbox);
 
 	/* be clever and allow the colorimeter to do it's job */
