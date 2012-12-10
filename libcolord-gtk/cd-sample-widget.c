@@ -105,6 +105,42 @@ cd_sample_widget_draw (GtkWidget *widget, cairo_t *cr)
 }
 
 /**
+ * cd_sample_window_enter_notify_event_cb:
+ **/
+static gboolean
+cd_sample_window_enter_notify_event_cb (GtkWidget *widget,
+					GdkEvent *event,
+					gpointer user_data)
+{
+	GdkCursor *cursor;
+	GdkWindow *window;
+
+	cursor = gdk_cursor_new (GDK_BLANK_CURSOR);
+	window = gtk_widget_get_window (widget);
+	gdk_window_set_cursor (window, cursor);
+	g_object_unref (cursor);
+	return TRUE;
+}
+
+/**
+ * cd_sample_window_leave_notify_event_cb:
+ **/
+static gboolean
+cd_sample_window_leave_notify_event_cb (GtkWidget *widget,
+					GdkEvent *event,
+					gpointer user_data)
+{
+	GdkCursor *cursor;
+	GdkWindow *window;
+
+	cursor = gdk_cursor_new (GDK_ARROW);
+	window = gtk_widget_get_window (widget);
+	gdk_window_set_cursor (window, cursor);
+	g_object_unref (cursor);
+	return TRUE;
+}
+
+/**
  * cd_sample_widget_class_init:
  **/
 static void
@@ -128,6 +164,21 @@ cd_sample_widget_class_init (CdSampleWidgetClass *class)
 }
 
 /**
+ * cd_example_window_realize_cb:
+ **/
+static void
+cd_example_window_realize_cb (GtkWidget *widget, gpointer user_data)
+{
+	GdkWindow *window;
+
+	/* hide the mouse pointer when over the calibration widget */
+	window = gtk_widget_get_window (widget);
+	g_assert (window != NULL);
+	gdk_window_set_events (window, GDK_ENTER_NOTIFY_MASK |
+				       GDK_LEAVE_NOTIFY_MASK);
+}
+
+/**
  * cd_sample_widget_init:
  **/
 static void
@@ -135,6 +186,13 @@ cd_sample_widget_init (CdSampleWidget *sample)
 {
 	sample->priv = CD_SAMPLE_WIDGET_GET_PRIVATE (sample);
 	cd_color_set_rgb (&sample->priv->color, 1.0, 1.0, 1.0);
+
+	g_signal_connect (sample, "realize",
+			  G_CALLBACK (cd_example_window_realize_cb), NULL);
+	g_signal_connect (sample, "enter-notify-event",
+			  G_CALLBACK (cd_sample_window_enter_notify_event_cb), NULL);
+	g_signal_connect (sample, "leave-notify-event",
+			  G_CALLBACK (cd_sample_window_leave_notify_event_cb), NULL);
 }
 
 /**

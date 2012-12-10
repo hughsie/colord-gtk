@@ -109,7 +109,7 @@ colord_sample_window_func (void)
 	gtk_window_present (window);
 
 	loop = g_main_loop_new (NULL, FALSE);
-	g_timeout_add_seconds (2, (GSourceFunc) colord_sample_window_loop_cb, loop);
+	g_timeout_add_seconds (5, (GSourceFunc) colord_sample_window_loop_cb, loop);
 	g_main_loop_run (loop);
 
 	g_main_loop_unref (loop);
