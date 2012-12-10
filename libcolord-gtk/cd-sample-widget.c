@@ -174,7 +174,8 @@ cd_example_window_realize_cb (GtkWidget *widget, gpointer user_data)
 	/* hide the mouse pointer when over the calibration widget */
 	window = gtk_widget_get_window (widget);
 	g_assert (window != NULL);
-	gdk_window_set_events (window, GDK_ENTER_NOTIFY_MASK |
+	gdk_window_set_events (window, GDK_EXPOSURE_MASK |
+				       GDK_ENTER_NOTIFY_MASK |
 				       GDK_LEAVE_NOTIFY_MASK);
 }
 
