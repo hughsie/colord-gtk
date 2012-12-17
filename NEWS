@@ -1,3 +1,16 @@
+Version 0.1.24
+~~~~~~~~~~~~~~
+Released: 2012-12-17
+
+New Features:
+ - Hide the mouse cursor when it goes over the sample widget (Richard Hughes)
+
+Bugfixes:
+ - Don't use a GtkImage for the sample window (Richard Hughes)
+ - Fix automatic dep on vala (Pacho Ramos)
+ - Fix the build (Matthias Clasen)
+ - Never use -Werror as it breaks jhbuild (Richard Hughes)
+
 Version 0.1.23
 ~~~~~~~~~~~~~~
 Released: 2012-08-29
