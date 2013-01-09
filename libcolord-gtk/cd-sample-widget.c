@@ -216,6 +216,7 @@ cd_sample_widget_set_color (CdSampleWidget *sample, const CdColorRGB *color)
 
 /**
  * cd_sample_widget_new:
+ *
  * Return value: A new #CdSampleWidget object.
  **/
 GtkWidget *
