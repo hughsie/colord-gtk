@@ -27,6 +27,7 @@
 #define __CD_WINDOW_SYNC_H
 
 #include <glib-object.h>
+#include <gio/gio.h>
 
 G_BEGIN_DECLS
 

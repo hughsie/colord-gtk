@@ -28,6 +28,7 @@
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
+#include <colord.h>
 
 G_BEGIN_DECLS
 

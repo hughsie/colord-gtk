@@ -27,6 +27,7 @@
 #define __CD_SAMPLE_WIDGET_H__
 
 #include <gtk/gtk.h>
+#include <colord.h>
 
 G_BEGIN_DECLS
 
