@@ -54,7 +54,7 @@ struct CdSampleWidgetClass
 
 GType		 cd_sample_widget_get_type	(void);
 GtkWidget	*cd_sample_widget_new		(void);
-void		 cd_sample_widget_set_color	(CdSampleWidget		*sample_widget,
+void		 cd_sample_widget_set_color	(CdSampleWidget		*sample,
 						 const CdColorRGB	*color);
 
 G_END_DECLS
