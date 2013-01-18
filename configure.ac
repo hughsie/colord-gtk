@@ -125,7 +125,7 @@ dnl - Check library dependencies
 dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.28.0 gobject-2.0 gthread-2.0 gio-2.0 >= 2.25.9 gio-unix-2.0 gmodule-2.0)
 PKG_CHECK_MODULES(GTK, gtk+-3.0)
-PKG_CHECK_MODULES(COLORD, colord)
+PKG_CHECK_MODULES(COLORD, colord >= 0.1.27)
 PKG_CHECK_MODULES(LCMS, lcms2 >= 2.2)
 
 dnl ---------------------------------------------------------------------------

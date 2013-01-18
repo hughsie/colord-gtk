@@ -70,7 +70,7 @@ up_sample_set_property (GObject *object, guint prop_id, const GValue *value, GPa
 	switch (prop_id) {
 	case PROP_COLOR:
 		tmp = g_value_get_boxed (value);
-		cd_color_copy_rgb (tmp, &sample->priv->color);
+		cd_color_rgb_copy (tmp, &sample->priv->color);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -186,7 +186,7 @@ static void
 cd_sample_widget_init (CdSampleWidget *sample)
 {
 	sample->priv = CD_SAMPLE_WIDGET_GET_PRIVATE (sample);
-	cd_color_set_rgb (&sample->priv->color, 1.0, 1.0, 1.0);
+	cd_color_rgb_set (&sample->priv->color, 1.0, 1.0, 1.0);
 
 	g_signal_connect (sample, "realize",
 			  G_CALLBACK (cd_example_window_realize_cb), NULL);
@@ -210,7 +210,7 @@ cd_sample_widget_set_color (CdSampleWidget *sample, const CdColorRGB *color)
 	g_return_if_fail (CD_IS_SAMPLE_WIDGET (sample));
 
 	/* set new color and refresh */
-	cd_color_copy_rgb (color, &sample->priv->color);
+	cd_color_rgb_copy (color, &sample->priv->color);
 	gtk_widget_queue_draw (GTK_WIDGET (sample));
 }
 
