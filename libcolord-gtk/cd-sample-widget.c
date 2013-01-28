@@ -202,6 +202,8 @@ cd_sample_widget_init (CdSampleWidget *sample)
  * @color: A color
  *
  * Sets the color for the sample widget
+ *
+ * Since: 0.1.24
  **/
 void
 cd_sample_widget_set_color (CdSampleWidget *sample, const CdColorRGB *color)
@@ -218,6 +220,8 @@ cd_sample_widget_set_color (CdSampleWidget *sample, const CdColorRGB *color)
  * cd_sample_widget_new:
  *
  * Return value: A new #CdSampleWidget object.
+ *
+ * Since: 0.1.24
  **/
 GtkWidget *
 cd_sample_widget_new (void)

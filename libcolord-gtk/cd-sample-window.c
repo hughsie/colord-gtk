@@ -63,6 +63,8 @@ cd_sample_window_pulse_cb (CdSampleWindow *sample_window)
  * @fraction: the fraction value to show, or -1 for pulsing.
  *
  * Sets the percentage value on the window.
+ *
+ * Since: 0.1.22
  **/
 void
 cd_sample_window_set_fraction (CdSampleWindow *sample_window,
@@ -96,6 +98,8 @@ cd_sample_window_set_fraction (CdSampleWindow *sample_window,
  * @color: the color
  *
  * Sets the window to a specific color.
+ *
+ * Since: 0.1.22
  **/
 void
 cd_sample_window_set_color (CdSampleWindow *sample_window,
@@ -211,6 +215,8 @@ cd_sample_window_finalize (GObject *object)
  * cd_sample_window_new:
  *
  * Return value: a new #CdSampleWindow object.
+ *
+ * Since: 0.1.22
  **/
 GtkWindow *
 cd_sample_window_new (void)
