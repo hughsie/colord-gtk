@@ -22,6 +22,7 @@
 #include "config.h"
 
 #include <gtk/gtk.h>
+#include <math.h>
 #include <colord.h>
 
 #include "cd-sample-widget.h"
@@ -83,6 +84,33 @@ up_sample_set_property (GObject *object, guint prop_id, const GValue *value, GPa
 }
 
 /**
+ * cd_sample_widget_draw_rounded_rectangle:
+ **/
+static void
+cd_sample_widget_draw_rounded_rectangle (cairo_t *cr,
+					 gdouble x,
+					 gdouble y,
+					 gdouble width,
+					 gdouble height,
+					 gdouble corner_radius)
+{
+	gdouble aspect = width / height;
+	gdouble radius = corner_radius / aspect;
+	gdouble degrees = M_PI / 180.0;
+
+	cairo_new_sub_path (cr);
+	cairo_arc (cr, x + width - radius, y + radius,
+		   radius, -90 * degrees, 0 * degrees);
+	cairo_arc (cr, x + width - radius, y + height - radius,
+		   radius, 0 * degrees, 90 * degrees);
+	cairo_arc (cr, x + radius, y + height - radius,
+		   radius, 90 * degrees, 180 * degrees);
+	cairo_arc (cr, x + radius, y + radius,
+		   radius, 180 * degrees, 270 * degrees);
+	cairo_close_path (cr);
+}
+
+/**
  * cd_sample_widget_draw:
  **/
 static gboolean
@@ -98,8 +126,14 @@ cd_sample_widget_draw (GtkWidget *widget, cairo_t *cr)
 	gtk_widget_get_allocation (widget, &allocation);
 	cairo_save (cr);
 	cairo_set_source_rgb (cr, color->R, color->G, color->B);
-	cairo_rectangle (cr, 0, 0, allocation.width, allocation.height);
-	cairo_fill (cr);
+	cd_sample_widget_draw_rounded_rectangle (cr, 0, 0,
+						 allocation.width,
+						 allocation.height,
+						 10.5);
+	cairo_fill_preserve (cr);
+	cairo_set_source_rgba (cr, 0.5, 0.5, 0.5, 1.0);
+	cairo_set_line_width (cr, 1.0);
+	cairo_stroke (cr);
 	cairo_restore (cr);
 	return FALSE;
 }
