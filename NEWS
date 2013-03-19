@@ -1,3 +1,15 @@
+Version 0.1.25
+~~~~~~~~~~~~~~
+Released: 2013-03-19
+
+New Features:
+ - Give the sample widget slightly curved corners and a gray outline (Richard Hughes)
+
+Bugfixes:
+ - Do not use deprecated functions from libcolord (Richard Hughes)
+ - Fix warnings when building ColordGtk-1.0.gir (Richard Hughes)
+ - Fix up the licence boilerplate for CdSampleWidget (Richard Hughes)
+
 Version 0.1.24
 ~~~~~~~~~~~~~~
 Released: 2012-12-17

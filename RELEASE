@@ -4,9 +4,9 @@ colord-gtk Release Notes
 
 git shortlog COLORD_GTK_0_1_24.. | grep -i -v trivial | grep -v Merge > NEWS.new
 
-Version 0.1.23
+Version 0.1.25
 ~~~~~~~~~~~~~~
-Released: 2012-xx-xx
+Released: 2013-xx-xx
 
 Translations:
 New Features:
@@ -15,8 +15,8 @@ Bugfixes:
 2. Commit changes to git:
 
 # MAKE SURE THESE ARE CORRECT
-export release_version="0.1.23"
-export release_tag="COLORD_GTK_0_1_23"
+export release_version="0.1.25"
+export release_tag="COLORD_GTK_0_1_25"
 
 git commit -a -m "Release colord-gtk ${release_version}"
 git tag -s -f -m "Release colord-gtk ${release_version}" "${release_tag}"
