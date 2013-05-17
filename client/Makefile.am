@@ -1,6 +1,6 @@
 INCLUDES =						\
 	$(GLIB_CFLAGS)					\
-	$(GTK_CFLAGS)					\
+	$(GTK3_CFLAGS)					\
 	$(COLORD_CFLAGS)				\
 	-I$(top_srcdir)					\
 	-I$(top_srcdir)/libcolord-gtk			\
@@ -22,7 +22,7 @@ colord_convert_LDADD =					\
 	$(LCMS_LIBS)					\
 	$(COLORD_LIBS)					\
 	$(COLORD_GTK_LIBS)				\
-	$(GTK_LIBS)					\
+	$(GTK3_LIBS)					\
 	$(GLIB_LIBS)					\
 	-lm
 

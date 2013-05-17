@@ -17,6 +17,7 @@ BuildRequires: lcms2-devel >= 2.2
 BuildRequires: gobject-introspection-devel
 BuildRequires: vala-tools
 BuildRequires: gtk3-devel
+BuildRequires: gtk2-devel
 BuildRequires: gtk-doc
 
 %description
@@ -37,6 +38,7 @@ Files for development with %{name}.
 %configure \
         --enable-gtk-doc \
         --enable-vala \
+        --enable-gtk2 \
         --disable-static \
         --disable-rpath \
         --disable-dependency-tracking
@@ -58,11 +60,14 @@ find %{buildroot} -name '*.a' -exec rm -f {} ';'
 %files -f %{name}.lang
 %doc README AUTHORS NEWS COPYING
 %{_libdir}/libcolord-gtk.so.*
+%{_libdir}/libcolord-gtk2.so.*
 %{_libdir}/girepository-1.0/ColordGtk-1.0.typelib
 
 %files devel
 %{_libdir}/libcolord-gtk.so
+%{_libdir}/libcolord-gtk2.so
 %{_libdir}/pkgconfig/colord-gtk.pc
+%{_libdir}/pkgconfig/colord-gtk2.pc
 %dir %{_includedir}/colord-1
 %{_includedir}/colord-1/colord-gtk.h
 %dir %{_includedir}/colord-1/colord-gtk

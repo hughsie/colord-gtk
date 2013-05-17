@@ -124,9 +124,19 @@ dnl ---------------------------------------------------------------------------
 dnl - Check library dependencies
 dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.28.0 gobject-2.0 gthread-2.0 gio-2.0 >= 2.25.9 gio-unix-2.0 gmodule-2.0)
-PKG_CHECK_MODULES(GTK, gtk+-3.0)
+PKG_CHECK_MODULES(GTK3, gtk+-3.0)
 PKG_CHECK_MODULES(COLORD, colord >= 0.1.27)
 PKG_CHECK_MODULES(LCMS, lcms2 >= 2.2)
+
+dnl ---------------------------------------------------------------------------
+dnl - Build Gtk+2 support
+dnl ---------------------------------------------------------------------------
+AC_ARG_ENABLE(gtk2, AS_HELP_STRING([--enable-gtk2],[build Gtk2 library]),
+	      enable_gtk2=$enableval,enable_gtk2=no)
+if test x$enable_gtk2 != xno; then
+	PKG_CHECK_MODULES(GTK2, gtk+-2.0)
+fi
+AM_CONDITIONAL(HAVE_GTK2, [test "x$enable_gtk2" = "xyes"])
 
 dnl ---------------------------------------------------------------------------
 dnl - Build VALA support
@@ -162,6 +172,7 @@ po/Makefile.in
 client/Makefile
 libcolord-gtk/cd-version.h
 libcolord-gtk/colord-gtk.pc
+libcolord-gtk/colord-gtk2.pc
 libcolord-gtk/Makefile
 ])
 AC_OUTPUT
@@ -178,4 +189,5 @@ echo "
         cppflags:                  ${CPPFLAGS}
         gobject-introspection:     ${found_introspection}
         Vala API generator:        ${has_vapigen}
+        Additional Gtk+2 support:  ${enable_gtk2}
 "

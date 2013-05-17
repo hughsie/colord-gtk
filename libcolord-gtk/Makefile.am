@@ -8,10 +8,9 @@ INTROSPECTION_COMPILER_ARGS =	--includedir=$(srcdir)			\
 				--includedir=$(top_builddir)/libcolord-gtk
 endif
 
-INCLUDES = \
+AM_CPPFLAGS = \
 	$(GLIB_CFLAGS)						\
 	$(COLORD_CFLAGS)					\
-	$(GTK_CFLAGS)						\
 	-I$(top_srcdir)						\
 	-I$(top_srcdir)/libcolord-gtk				\
 	-DCD_COMPILATION					\
@@ -42,8 +41,12 @@ libcolord_gtk_la_SOURCES =					\
 
 libcolord_gtk_la_LIBADD =					\
 	$(COLORD_LIBS)						\
-	$(GTK_LIBS)						\
+	$(GTK3_LIBS)						\
 	$(GLIB_LIBS)
+
+libcolord_gtk_la_CPPFLAGS =					\
+	$(AM_CPPFLAGS)						\
+	$(GTK3_CFLAGS)
 
 libcolord_gtk_la_LDFLAGS =					\
 	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)	\
@@ -57,24 +60,57 @@ libcolord_gtk_la_CFLAGS =					\
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = colord-gtk.pc
 
+if HAVE_GTK2
+pkgconfig_DATA += colord-gtk2.pc
+lib_LTLIBRARIES +=						\
+	libcolord-gtk2.la
+
+libcolord_gtk2_la_SOURCES =					\
+	cd-window.c						\
+	cd-window-sync.c
+
+libcolord_gtk2_la_LIBADD =					\
+	$(COLORD_LIBS)						\
+	$(GTK2_LIBS)						\
+	$(GLIB_LIBS)
+
+libcolord_gtk2_la_CPPFLAGS =					\
+	$(AM_CPPFLAGS)						\
+	$(GTK2_CFLAGS)
+
+libcolord_gtk2_la_LDFLAGS =					\
+	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)	\
+	-export-dynamic						\
+	-no-undefined						\
+	-export-symbols-regex '^cd_.*'
+
+libcolord_gtk2_la_CFLAGS =					\
+	$(WARNINGFLAGS_C)
+endif
+
 check_PROGRAMS =						\
 	cd-self-test
 
 cd_self_test_SOURCES =						\
 	cd-self-test.c
 
+cd_self_test_CPPFLAGS =						\
+	$(AM_CPPFLAGS)						\
+	$(GTK3_CFLAGS)
+
 cd_self_test_LDADD =						\
 	$(COLORD_LIBS)						\
 	$(GLIB_LIBS)						\
-	$(GTK_LIBS)						\
-	$(lib_LTLIBRARIES)
+	$(GTK3_LIBS)						\
+	libcolord-gtk.la
 
 cd_self_test_CFLAGS = $(WARNINGFLAGS_C)
 
 TESTS = cd-self-test
 
 EXTRA_DIST =							\
-	colord-gtk.pc.in
+	colord-gtk.pc.in					\
+	colord-gtk2.pc.in
 
 MAINTAINERCLEANFILES =						\
 	$(noinst_LIBRARIES)
@@ -88,7 +124,7 @@ introspection_sources =						\
 
 ColordGtk-1.0.gir: libcolord-gtk.la
 ColordGtk_1_0_gir_INCLUDES = GObject-2.0 Gio-2.0 Gtk-3.0 Colord-1.0
-ColordGtk_1_0_gir_CFLAGS = $(INCLUDES)
+ColordGtk_1_0_gir_CFLAGS = $(AM_CPPFLAGS)
 ColordGtk_1_0_gir_SCANNERFLAGS = --identifier-prefix=Cd \
 				--symbol-prefix=cd \
 				--warn-all \
