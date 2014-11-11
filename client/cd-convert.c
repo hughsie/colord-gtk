@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
  *
- * Copyright (C) 2012 Richard Hughes <richard@hughsie.com>
+ * Copyright (C) 2012-2014 Richard Hughes <richard@hughsie.com>
  *
  * Licensed under the GNU General Public License Version 2
  *
@@ -103,8 +103,7 @@ out:
  * cd_convert_setup_sensor:
  **/
 static CdSensor *
-cd_convert_setup_sensor (CdClient *client,
-			 GError **error)
+cd_convert_setup_sensor (CdClient *client, GError **error)
 {
 	CdSensor *sensor = NULL;
 	CdSensor *sensor_tmp;
@@ -259,6 +258,7 @@ main (int argc, char **argv)
 	CdSensor *sensor = NULL;
 	gboolean ret;
 	gchar *device_id = NULL;
+	gchar *sensor_id = NULL;
 	GError *error = NULL;
 	gint retval = EXIT_FAILURE;
 	GOptionContext *context;
@@ -268,6 +268,9 @@ main (int argc, char **argv)
 		{ "device", '\0', 0, G_OPTION_ARG_STRING, &device_id,
 			/* TRANSLATORS: command line option */
 			_("Use this device for profiling"), NULL },
+		{ "sensor", '\0', 0, G_OPTION_ARG_STRING, &sensor_id,
+			/* TRANSLATORS: command line option */
+			_("Use this sensor for profiling"), NULL },
 		{ "xid", '\0', 0, G_OPTION_ARG_INT, &xid,
 			/* TRANSLATORS: command line option */
 			_("Make the window modal to this XID"), NULL },
@@ -282,8 +285,7 @@ main (int argc, char **argv)
 
 	gtk_init (&argc, &argv);
 
-	/* TRANSLATORS: just dumps the EDID to disk */
-	context = g_option_context_new (_("gcm-dispread"));
+	context = g_option_context_new (NULL);
 	g_option_context_add_main_entries (context, options, NULL);
 	g_option_context_add_group (context, gtk_get_option_group (TRUE));
 	ret = g_option_context_parse (context, &argc, &argv, &error);
@@ -296,7 +298,7 @@ main (int argc, char **argv)
 	if (!ret)
 		goto out;
 
-	/* check device */
+	/* find device */
 	if (device_id != NULL) {
 		device = cd_client_find_device_sync (client,
 						     device_id,
@@ -307,6 +309,23 @@ main (int argc, char **argv)
 			goto out;
 		}
 		ret = cd_device_connect_sync (device,
+					      NULL,
+					      &error);
+		if (!ret)
+			goto out;
+	}
+
+	/* find sensor */
+	if (sensor_id != NULL) {
+		sensor = cd_client_find_sensor_sync (client,
+						     sensor_id,
+						     NULL,
+						     &error);
+		if (sensor == NULL) {
+			ret = FALSE;
+			goto out;
+		}
+		ret = cd_sensor_connect_sync (sensor,
 					      NULL,
 					      &error);
 		if (!ret)
@@ -331,11 +350,13 @@ main (int argc, char **argv)
 		   g_str_has_suffix (argv[1], ".ti1") &&
 		   g_str_has_suffix (argv[2], ".ti3")) {
 
-		/* get sensor */
-		sensor = cd_convert_setup_sensor (client, &error);
+		/* get default sensor */
 		if (sensor == NULL) {
-			ret = FALSE;
-			goto out;
+			sensor = cd_convert_setup_sensor (client, &error);
+			if (sensor == NULL) {
+				ret = FALSE;
+				goto out;
+			}
 		}
 
 		/* mark device to be profiled in colord */
@@ -370,9 +391,7 @@ main (int argc, char **argv)
 	retval = EXIT_SUCCESS;
 out:
 	if (!ret) {
-		g_print ("%s: %s\n",
-			 _("Failed to calibrate"),
-			 error->message);
+		g_print ("%s: %s\n", _("Failed to calibrate"), error->message);
 		g_error_free (error);
 	}
 	g_option_context_free (context);
@@ -383,5 +402,6 @@ out:
 	if (sensor != NULL)
 		g_object_unref (sensor);
 	g_free (device_id);
+	g_free (sensor_id);
 	return retval;
 }
