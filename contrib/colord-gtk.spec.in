@@ -59,6 +59,8 @@ find %{buildroot} -name '*.a' -exec rm -f {} ';'
 
 %files -f %{name}.lang
 %doc README AUTHORS NEWS COPYING
+%{_bindir}/*
+%{_mandir}/man1/*.1.gz
 %{_libdir}/libcolord-gtk.so.*
 %{_libdir}/libcolord-gtk2.so.*
 %{_libdir}/girepository-1.0/ColordGtk-1.0.typelib

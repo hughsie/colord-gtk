@@ -160,6 +160,15 @@ fi
 AM_CONDITIONAL(HAVE_VAPIGEN, [test "x$has_vapigen" = "xyes"])
 
 dnl ---------------------------------------------------------------------------
+dnl - Is docbook2man available?
+dnl ---------------------------------------------------------------------------
+AC_PATH_PROG(DOCBOOK2MAN, docbook2man, no)
+if test "$DOCBOOK2MAN" = "no" ; then
+	AC_MSG_WARN([docbook2man not found, will not be able to build man documentation (if tarball, pre-generated documentation will be installed)])
+fi
+AM_CONDITIONAL(HAVE_DOCBOOK2MAN, [test "$DOCBOOK2MAN" != "no"])
+
+dnl ---------------------------------------------------------------------------
 dnl - Makefiles, etc.
 dnl ---------------------------------------------------------------------------
 AC_CONFIG_FILES([
@@ -168,6 +177,7 @@ contrib/Makefile
 doc/Makefile
 doc/api/Makefile
 doc/api/version.xml
+man/Makefile
 po/Makefile.in
 client/Makefile
 libcolord-gtk/cd-version.h

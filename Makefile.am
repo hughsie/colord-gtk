@@ -5,6 +5,7 @@ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 NULL =
 
 SUBDIRS = 						\
+	man						\
 	contrib						\
 	libcolord-gtk					\
 	po

@@ -12,13 +12,13 @@ INCLUDES =						\
 COLORD_GTK_LIBS =					\
 	$(top_builddir)/libcolord-gtk/libcolord-gtk.la
 
-noinst_PROGRAMS =					\
-	colord-convert
+bin_PROGRAMS =						\
+	cd-convert
 
-colord_convert_SOURCES =				\
+cd_convert_SOURCES =					\
 	cd-convert.c
 
-colord_convert_LDADD =					\
+cd_convert_LDADD =					\
 	$(LCMS_LIBS)					\
 	$(COLORD_LIBS)					\
 	$(COLORD_GTK_LIBS)				\
@@ -26,7 +26,7 @@ colord_convert_LDADD =					\
 	$(GLIB_LIBS)					\
 	-lm
 
-colord_convert_CFLAGS =					\
+cd_convert_CFLAGS =					\
 	$(WARNINGFLAGS_C)
 
 -include $(top_srcdir)/git.mk
