@@ -1,3 +1,15 @@
+Version 0.1.26
+~~~~~~~~~~~~~~
+Released: 2014-12-02
+
+New Features:
+ - Actually install the cd-convert utility (Richard Hughes)
+ - Provide an optional Gtk2 version of libcolord-gtk (Richard Hughes)
+
+Bugfixes:
+ - Do not link against the unused gio-unix-2.0 (Richard Hughes)
+ - Fix cd-convert to work with multiple sensors attached (Richard Hughes)
+
 Version 0.1.25
 ~~~~~~~~~~~~~~
 Released: 2013-03-19

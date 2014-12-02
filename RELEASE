@@ -6,9 +6,8 @@ git shortlog COLORD_GTK_0_1_25.. | grep -i -v trivial | grep -v Merge > NEWS.new
 
 Version 0.1.26
 ~~~~~~~~~~~~~~
-Released: 2013-xx-xx
+Released: 2014-xx-xx
 
-Translations:
 New Features:
 Bugfixes:
 
