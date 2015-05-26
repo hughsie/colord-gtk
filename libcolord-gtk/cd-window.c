@@ -376,7 +376,7 @@ cd_window_update_widget_plug_name (CdWindow *window,
 				   GtkWidget *widget)
 {
 	CdWindowPrivate *priv = window->priv;
-	const gchar *plug_name;
+	gchar *plug_name;
 	GdkScreen *screen;
 	GdkWindow *gdk_window;
 	gint monitor_num;
@@ -390,12 +390,14 @@ cd_window_update_widget_plug_name (CdWindow *window,
 	plug_name = gdk_screen_get_monitor_plug_name (screen, monitor_num);
 
 	/* ignoring MAP as plug_name has not changed */
-	if (g_strcmp0 (plug_name, priv->plug_name) == 0)
+	if (g_strcmp0 (plug_name, priv->plug_name) == 0) {
+		g_free (plug_name);
 		return;
+	}
 
 	/* refresh data */
 	g_free (priv->plug_name);
-	priv->plug_name = g_strdup (plug_name);
+	priv->plug_name = plug_name;
 	if (priv->device != NULL) {
 		g_object_unref (priv->device);
 		priv->device = NULL;
