@@ -9,10 +9,9 @@ URL:       http://www.freedesktop.org/software/colord/
 Source0:   http://www.freedesktop.org/software/colord/releases/%{name}-%{version}.tar.xz
 
 BuildRequires: docbook-utils
-BuildRequires: gettext
+BuildRequires: gettext >= 0.19.8
 BuildRequires: glib2-devel
 BuildRequires: colord-devel
-BuildRequires: intltool
 BuildRequires: lcms2-devel >= 2.2
 BuildRequires: gobject-introspection-devel
 BuildRequires: vala-tools
