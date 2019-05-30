@@ -32,10 +32,7 @@ EXTRA_DIST =						\
 	README						\
 	NEWS						\
 	autogen.sh					\
-	config.h					\
-	intltool-extract.in				\
-	intltool-merge.in				\
-	intltool-update.in
+	config.h
 
 MAINTAINERCLEANFILES =					\
 	$(srcdir)/INSTALL				\
