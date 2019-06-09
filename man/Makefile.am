@@ -2,7 +2,7 @@ man_MANS_DIST = 					\
 	cd-convert.1
 
 EXTRA_DIST =						\
-	cd-convert.sgml					\
+	cd-convert.xml					\
 	$(man_MANS_DIST)
 
 if HAVE_DOCBOOK2MAN
@@ -11,7 +11,7 @@ man_MANS =						\
 endif
 
 if HAVE_DOCBOOK2MAN
-cd-convert.1: cd-convert.sgml
+cd-convert.1: cd-convert.xml
 	$(AM_V_GEN)					\
 	docbook2man $? > /dev/null
 endif
