@@ -22,7 +22,6 @@
 #include "config.h"
 
 #include <gtk/gtk.h>
-#include <math.h>
 #include <colord.h>
 
 #include "cd-sample-widget.h"
@@ -96,7 +95,7 @@ cd_sample_widget_draw_rounded_rectangle (cairo_t *cr,
 {
 	gdouble aspect = width / height;
 	gdouble radius = corner_radius / aspect;
-	gdouble degrees = M_PI / 180.0;
+	gdouble degrees = G_PI / 180.0;
 
 	cairo_new_sub_path (cr);
 	cairo_arc (cr, x + width - radius, y + radius,
