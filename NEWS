@@ -1,3 +1,16 @@
+Version 0.2.0
+~~~~~~~~~~~~~
+Released: 2019-06-20
+
+New Features:
+ - Migrate to gettext (Martin Blanchard)
+ - Port to DocBook 5 (Martin Blanchard)
+ - Port to the Meson build system (Martin Blanchard)
+
+Bugfixes:
+ - Do not leak plug_name (Roman Lebedev)
+ - Fix gtk-doc build when srcdir != builddir (Ting-Wei Lan)
+
 Version 0.1.26
 ~~~~~~~~~~~~~~
 Released: 2014-12-02
