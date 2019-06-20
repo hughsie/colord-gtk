@@ -8,15 +8,15 @@ License:   LGPLv2+
 URL:       http://www.freedesktop.org/software/colord/
 Source0:   http://www.freedesktop.org/software/colord/releases/%{name}-%{version}.tar.xz
 
-BuildRequires: docbook-utils
+BuildRequires: meson
+BuildRequires: docbook5-style-xsl
 BuildRequires: gettext >= 0.19.8
 BuildRequires: glib2-devel
-BuildRequires: colord-devel
+BuildRequires: colord-devel >= 0.1.23
 BuildRequires: lcms2-devel >= 2.2
 BuildRequires: gobject-introspection-devel
 BuildRequires: vala-tools
 BuildRequires: gtk3-devel
-BuildRequires: gtk2-devel
 BuildRequires: gtk-doc
 
 %description
@@ -31,44 +31,29 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 Files for development with %{name}.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
-%configure \
-        --enable-gtk-doc \
-        --enable-vala \
-        --enable-gtk2 \
-        --disable-static \
-        --disable-rpath \
-        --disable-dependency-tracking
-
-make %{?_smp_mflags}
+%meson -Ddocs=true -Dgtk2=false -Dman=true -Dtests=false -Dvapi=true
+%meson_build
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
-
-# Remove static libs and libtool archives.
-find %{buildroot} -name '*.la' -exec rm -f {} ';'
-find %{buildroot} -name '*.a' -exec rm -f {} ';'
+%meson_install
 
 %find_lang %{name}
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 %files -f %{name}.lang
 %doc README AUTHORS NEWS COPYING
 %{_bindir}/*
 %{_mandir}/man1/*.1.gz
 %{_libdir}/libcolord-gtk.so.*
-%{_libdir}/libcolord-gtk2.so.*
 %{_libdir}/girepository-1.0/ColordGtk-1.0.typelib
 
 %files devel
 %{_libdir}/libcolord-gtk.so
-%{_libdir}/libcolord-gtk2.so
 %{_libdir}/pkgconfig/colord-gtk.pc
-%{_libdir}/pkgconfig/colord-gtk2.pc
 %dir %{_includedir}/colord-1
 %{_includedir}/colord-1/colord-gtk.h
 %dir %{_includedir}/colord-1/colord-gtk
@@ -77,6 +62,7 @@ find %{buildroot} -name '*.a' -exec rm -f {} ';'
 %{_datadir}/gir-1.0/ColordGtk-1.0.gir
 %doc %{_datadir}/gtk-doc/html/colord-gtk
 %{_datadir}/vala/vapi/colord-gtk.vapi
+%{_datadir}/vala/vapi/colord-gtk.deps
 %dir %{_datadir}/gtk-doc
 %dir %{_datadir}/gtk-doc/html
 
