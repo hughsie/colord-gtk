@@ -61,6 +61,7 @@ pkgg.generate(
   description : 'colord-gtk is GTK integration for libcolord',
 )
 
+if get_option('introspection')
 libcolord_gtk_gir = gnome.generate_gir(
   colord_gtk,
   sources : [
@@ -97,6 +98,7 @@ libcolord_gtk_gir = gnome.generate_gir(
   ],
   install : true
 )
+endif
 
 if get_option('vapi')
   gnome.generate_vapi(
