@@ -1,4 +1,5 @@
 option('gtk2', type : 'boolean', value : false, description : 'Build Gtk2 library')
+option('introspection', type : 'boolean', value : true, description : 'Build gobject-introspection typelib files')
 option('vapi', type : 'boolean', value : false, description : 'Build vala bindings')
 option('tests', type : 'boolean', value : true, description : 'Build self tests')
 option('man', type : 'boolean', value : true, description : 'Generate man pages')
