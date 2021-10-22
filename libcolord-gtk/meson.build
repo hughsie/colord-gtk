@@ -38,7 +38,7 @@ colord_gtk = shared_library(
   dependencies : [
     glib,
     gio,
-    gtk,
+    gtk3,
     colord,
   ],
   c_args : [
@@ -87,7 +87,7 @@ libcolord_gtk_gir = gnome.generate_gir(
   dependencies : [
     glib,
     gio,
-    gtk,
+    gtk3,
     colord,
   ],
   includes : [
@@ -156,7 +156,7 @@ if get_option('tests')
     dependencies : [
       glib,
       gio,
-      gtk,
+      gtk3,
       colord,
     ],
     link_with : colord_gtk,

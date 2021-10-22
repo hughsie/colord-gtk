@@ -10,7 +10,7 @@ executable(
   dependencies : [
     glib,
     gio,
-    gtk,
+    gtk3,
     colord,
   ],
   link_with : colord_gtk,

@@ -94,7 +94,7 @@ endforeach
 
 glib = dependency('glib-2.0', version : '>= 2.28.0')
 gio = dependency('gio-2.0', version : '>= 2.25.9Z')
-gtk = dependency('gtk+-3.0')
+gtk3 = dependency('gtk+-3.0')
 colord = dependency('colord', version : '>= 0.1.27')
 
 if get_option('gtk2')
