@@ -94,12 +94,15 @@ endforeach
 
 glib = dependency('glib-2.0', version : '>= 2.28.0')
 gio = dependency('gio-2.0', version : '>= 2.25.9Z')
-gtk3 = dependency('gtk+-3.0')
 colord = dependency('colord', version : '>= 0.1.27')
 
 if get_option('gtk2')
   gtk2 = dependency('gtk+-2.0')
   conf.set('HAVE_GTK2', '1')
+endif
+
+if get_option('gtk3')
+  gtk3 = dependency('gtk+-3.0')
 endif
 
 if get_option('gtk4')
@@ -144,7 +147,9 @@ root_incdir = include_directories('.')
 subdir('libcolord-gtk')
 subdir('po')
 
-subdir('client')
+if get_option('gtk3')
+  subdir('client')
+endif
 if get_option('docs')
   subdir('doc')
 endif
