@@ -144,6 +144,68 @@ if get_option('gtk2')
   )
 endif
 
+if get_option('gtk4')
+  colord_gtk4 = shared_library(
+    'colord-gtk4',
+    sources : [
+      'cd-sample-widget-gtk4.c',
+      'cd-sample-window-gtk4.c',
+      'cd-window.c',
+      'cd-window-sync.c',
+    ],
+    soversion : lt_current,
+    version : lt_version,
+    dependencies : [
+      glib,
+      gio,
+      gtk4,
+      colord,
+    ],
+    c_args : [
+      cargs,
+      '-DBUILD_COLORD_GTK4',
+    ],
+    include_directories : [
+      root_incdir,
+    ],
+    install : true
+  )
+
+  pkgg.generate(
+    libraries : colord_gtk4,
+    requires : [ 'colord', 'gtk4' ],
+    subdirs : 'colord-1',
+    version : meson.project_version(),
+    name : 'colord-gtk4',
+    filebase : 'colord-gtk4',
+    description : 'colord-gtk4 is GTK4 integration for libcolord',
+  )
+
+  if get_option('tests')
+    e = executable(
+        'colord-gtk4-test',
+        sources : [
+          'cd-self-test-gtk4.c',
+        ],
+        include_directories : [
+          root_incdir,
+        ],
+        dependencies : [
+          glib,
+          gio,
+          gtk4,
+          colord,
+        ],
+        link_with : colord_gtk4,
+        c_args : [
+          cargs,
+        ]
+      )
+    test('colord-gtk4-test-private', e)
+  endif
+
+endif
+
 if get_option('tests')
   e = executable(
     'colord-gtk-test',

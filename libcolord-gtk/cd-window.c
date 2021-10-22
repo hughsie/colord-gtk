@@ -377,6 +377,8 @@ cd_window_update_widget_plug_name (CdWindow *window,
 {
 	CdWindowPrivate *priv = window->priv;
 	gchar *plug_name;
+
+#ifndef BUILD_COLORD_GTK4
 	GdkScreen *screen;
 	GdkWindow *gdk_window;
 	gint monitor_num;
@@ -388,6 +390,18 @@ cd_window_update_widget_plug_name (CdWindow *window,
 	monitor_num = gdk_screen_get_monitor_at_window (screen,
 							gdk_window);
 	plug_name = gdk_screen_get_monitor_plug_name (screen, monitor_num);
+#else
+	GdkSurface *surface;
+	GdkDisplay *display;
+	GdkMonitor *monitor;
+	GtkNative *native;
+
+	native = gtk_widget_get_native (widget);
+	surface = gtk_native_get_surface (native);
+	display = gtk_widget_get_display (widget);
+	monitor = gdk_display_get_monitor_at_surface (display, surface);
+	plug_name = g_strdup (gdk_monitor_get_connector (monitor));
+#endif
 
 	/* ignoring MAP as plug_name has not changed */
 	if (g_strcmp0 (plug_name, priv->plug_name) == 0) {

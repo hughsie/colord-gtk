@@ -102,6 +102,10 @@ if get_option('gtk2')
   conf.set('HAVE_GTK2', '1')
 endif
 
+if get_option('gtk4')
+  gtk4 = dependency('gtk4', version : '>= 4.4')
+endif
+
 gnome = import('gnome')
 i18n = import('i18n')
 
