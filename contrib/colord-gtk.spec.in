@@ -66,13 +66,16 @@ Files for GTK 4 development with %{name}4.
 %{_mandir}/man1/*.1*
 %{_libdir}/libcolord-gtk.so.*
 %{_libdir}/girepository-1.0/ColordGtk-1.0.typelib
+%{_libdir}/libcolord-gtk4.so.*
 
 %files -n colord-gtk4
 %{_libdir}/libcolord-gtk4.so.*
 
 %files devel
 %{_libdir}/libcolord-gtk.so
+%{_libdir}/libcolord-gtk4.so
 %{_libdir}/pkgconfig/colord-gtk.pc
+%{_libdir}/pkgconfig/colord-gtk4.pc
 %dir %{_includedir}/colord-1
 %{_includedir}/colord-1/colord-gtk.h
 %dir %{_includedir}/colord-1/colord-gtk
