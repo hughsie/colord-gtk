@@ -15,7 +15,7 @@ BuildRequires: glib2-devel
 BuildRequires: colord-devel >= 0.1.23
 BuildRequires: lcms2-devel >= 2.2
 BuildRequires: gobject-introspection-devel
-BuildRequires: vala-tools
+BuildRequires: vala
 BuildRequires: gtk3-devel
 BuildRequires: gtk-doc
 
