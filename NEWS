@@ -1,3 +1,14 @@
+Version 0.3.0
+~~~~~~~~~~~~~
+Released: 2022-02-16
+
+New Features:
+ - Add a GTK4 variant (Georges Basile Stavracas Neto)
+
+Bugfixes:
+ - Make introspection optional in meson (David Michael)
+ - Make GTK3 build optional too (Georges Basile Stavracas Neto)
+
 Version 0.2.0
 ~~~~~~~~~~~~~
 Released: 2019-06-20
