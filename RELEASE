@@ -2,9 +2,9 @@ colord-gtk Release Notes
 
 1. Write NEWS entries for colord-gtk in the same format as usual.
 
-git shortlog COLORD_GTK_0_2_0.. | grep -i -v trivial | grep -v Merge > NEWS.new
+git shortlog 0.3.0.. | grep -i -v trivial | grep -v Merge > NEWS.new
 
-Version 0.3.0
+Version 0.3.1
 ~~~~~~~~~~~~~
 Released: 2022-xx-xx
 
@@ -14,7 +14,7 @@ Bugfixes:
 2. Commit changes to git:
 
 # MAKE SURE THESE ARE CORRECT
-export release_version="0.3.0"
+export release_version="0.3.1"
 git commit -a -m "Release colord-gtk ${release_version}"
 git tag -s -f -m "Release colord-gtk ${release_version}" "${release_version}"
 <wait>

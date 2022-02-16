@@ -1,5 +1,5 @@
 project('colord-gtk', 'c',
-  version : '0.3.0',
+  version : '0.3.1',
   license : 'LGPL-2.1+',
   meson_version : '>=0.46.0',
   default_options : ['c_std=c99']
