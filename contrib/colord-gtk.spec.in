@@ -17,6 +17,7 @@ BuildRequires: lcms2-devel >= 2.2
 BuildRequires: gobject-introspection-devel
 BuildRequires: vala
 BuildRequires: gtk3-devel
+BuildRequires: gtk4-devel
 BuildRequires: gtk-doc
 
 %description
@@ -29,6 +30,21 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 Files for development with %{name}.
+
+%package -n colord-gtk4
+Summary:  GTK 4 support library for colord
+
+%description -n colord-gtk4
+colord-gtk is a support library for colord and provides additional
+functionality that requires GTK. This package contains the GTK 4
+build of colord-gtk.
+
+%package -n colord-gtk4-devel
+Summary:  Development package for colord-gtk4
+Requires: %{name}-devel%{?_isa} = %{version}-%{release}
+
+%description -n colord-gtk4-devel
+Files for GTK 4 development with %{name}4.
 
 %prep
 %autosetup -p1
@@ -47,9 +63,12 @@ Files for development with %{name}.
 %files -f %{name}.lang
 %doc README AUTHORS NEWS COPYING
 %{_bindir}/*
-%{_mandir}/man1/*.1.gz
+%{_mandir}/man1/*.1*
 %{_libdir}/libcolord-gtk.so.*
 %{_libdir}/girepository-1.0/ColordGtk-1.0.typelib
+
+%files -n colord-gtk4
+%{_libdir}/libcolord-gtk4.so.*
 
 %files devel
 %{_libdir}/libcolord-gtk.so
@@ -65,6 +84,12 @@ Files for development with %{name}.
 %{_datadir}/vala/vapi/colord-gtk.deps
 %dir %{_datadir}/gtk-doc
 %dir %{_datadir}/gtk-doc/html
+
+%files -n colord-gtk4-devel
+%{_libdir}/libcolord-gtk4.so
+%{_libdir}/pkgconfig/colord-gtk4.pc
+# Requires the base -devel package for headers. No GTK 4 .gir nor VAPI yet.
+
 
 %changelog
 * #LONGDATE# Richard Hughes <richard@hughsie.com> #VERSION#-0.#BUILD##ALPHATAG#
