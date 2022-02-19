@@ -147,12 +147,13 @@ root_incdir = include_directories('.')
 subdir('libcolord-gtk')
 subdir('po')
 
-if get_option('gtk3')
+with_client = get_option('gtk3')
+if with_client
   subdir('client')
 endif
 if get_option('docs')
   subdir('doc')
 endif
-if get_option('man')
+if get_option('man') and with_client
   subdir('man')
 endif
