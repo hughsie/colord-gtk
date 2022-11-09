@@ -1,0 +1,38 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the colord-gtk package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: colord-gtk\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-09 18:06+0100\n"
+"PO-Revision-Date: 2022-11-09 18:12+0100\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <(nothing)>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2\n"
+
+#. TRANSLATORS: command line option
+#: client/cd-convert.c:270
+msgid "Use this device for profiling"
+msgstr "ამ მოწყობილობის პროფილირებისთვის გამოყენება"
+
+#. TRANSLATORS: command line option
+#: client/cd-convert.c:273
+msgid "Use this sensor for profiling"
+msgstr "ამ სენსორის პროფილირებისთვის გამოყენება"
+
+#. TRANSLATORS: command line option
+#: client/cd-convert.c:276
+msgid "Make the window modal to this XID"
+msgstr "ფანჯრის მოდალის ამ XID-მდე მიტანა"
+
+#: client/cd-convert.c:394
+msgid "Failed to calibrate"
+msgstr "კალიბრაციის შეცდომა"
