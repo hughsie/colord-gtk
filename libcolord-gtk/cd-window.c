@@ -295,7 +295,7 @@ cd_window_get_profile_device_find_cb (GObject *source,
 }
 
 static void
-cd_window_device_changed_cb (CdDevice *device, CdWindow *window)
+cd_window_device_changed_cb (CdClient *client, CdDevice *device, CdWindow *window)
 {
 	CdProfile *profile;
 
