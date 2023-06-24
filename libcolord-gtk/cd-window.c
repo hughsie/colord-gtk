@@ -521,6 +521,7 @@ cd_window_class_init (CdWindowClass *klass)
 	/**
 	 * CdWindow::changed:
 	 * @window: the #CdDevice instance that emitted the signal
+	 * @profile: the #CdProfile
 	 *
 	 * The ::changed signal is emitted when the device profile has
 	 * changed. The #CdProfile that is referenced in the callback
