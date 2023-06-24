@@ -309,13 +309,13 @@ cd_window_device_changed_cb (CdClient *client, CdDevice *device, CdWindow *windo
 
 	/* get new default profile */
 	profile = cd_device_get_default_profile (window->priv->device);
-	if (cd_profile_equal (profile, window->priv->profile))
+	if (profile == NULL && window->priv->profile == NULL)
+		return;
+	if (profile != NULL && cd_profile_equal (profile, window->priv->profile))
 		return;
 
 	/* replace profile instance and emit if changed */
-	if (window->priv->profile != NULL)
-		g_object_unref (window->priv->profile);
-	window->priv->profile = g_object_ref (profile);
+	g_set_object(&window->priv->profile, profile);
 	g_signal_emit (window, signals[SIGNAL_CHANGED], 0,
 		       window->priv->profile);
 }
