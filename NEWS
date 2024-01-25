@@ -1,3 +1,10 @@
+Version 0.3.1
+~~~~~~~~~~~~~
+Released: 2024-01-25
+
+Bugfixes:
+ - Fix the callback signature to fix a crash (Richard Hughes)
+
 Version 0.3.0
 ~~~~~~~~~~~~~
 Released: 2022-02-16
