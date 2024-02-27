@@ -20,6 +20,6 @@
     </foaf:Person>
   </maintainer>
 
-  <license rdf:resource="http://www.gnu.org/licenses/gpl-2.0.txt" />
+  <license rdf:resource="https://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt" />
 
 </Project>
