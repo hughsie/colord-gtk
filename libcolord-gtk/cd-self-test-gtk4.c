@@ -1,5 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
- *
+/*
  * Copyright (C) 2021 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  *               2010-2012 Richard Hughes <richard@hughsie.com>
  *
