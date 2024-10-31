@@ -18,6 +18,7 @@
   <refmeta>
     <refentrytitle>cd-convert</refentrytitle>
     <manvolnum>1</manvolnum>
+    <refmiscinfo class="source">colord-gtk</refmiscinfo>
     <refmiscinfo class="manual">User Commands</refmiscinfo>
   </refmeta>
   <refnamediv>
